@@ -2,6 +2,10 @@
 import type { ReactNode } from "react";
 import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 
+import appCss from "@/styles/app.css?url";
+// Supports weights 100-900
+import roboto from "@fontsource-variable/roboto?url";
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
@@ -15,6 +19,10 @@ export const Route = createRootRoute({
       {
         title: "TanStack Start Starter",
       },
+    ],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "stylesheet", href: roboto },
     ],
   }),
   component: RootComponent,
