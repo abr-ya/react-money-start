@@ -16,11 +16,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@clerk/tanstack-react-start": "^0.19.0",
     "@fontsource-variable/roboto": "^5.2.6",
     "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/postcss": "^4.1.11",
-    "@tanstack/react-router": "^1.128.8",
-    "@tanstack/react-start": "^1.128.8",
+    "@tanstack/react-router": "^1.129.0",
+    "@tanstack/react-router-devtools": "^1.129.0",
+    "@tanstack/react-start": "^1.129.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.525.0",
@@ -47,5 +49,6 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.37.0",
     "vite-tsconfig-paths": "^5.1.4"
-  }
+  },
+  "overrides": {}
 }
