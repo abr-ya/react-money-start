@@ -5,20 +5,23 @@ import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-r
 import appCss from "@/styles/app.css?url";
 // Supports weights 100-900
 import roboto from "@fontsource-variable/roboto?url";
+import { Navbar } from "@/components";
+
+const RootComponent = () => (
+  <RootDocument>
+    <Outlet />
+  </RootDocument>
+);
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
-      {
-        charSet: "utf-8",
-      },
+      { charSet: "utf-8" },
       {
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
-      {
-        title: "TanStack Start Starter",
-      },
+      { title: "Money App | TanStack Start" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -28,24 +31,15 @@ export const Route = createRootRoute({
   component: RootComponent,
 });
 
-function RootComponent() {
-  return (
-    <RootDocument>
-      <Outlet />
-    </RootDocument>
-  );
-}
-
-function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
-  return (
-    <html>
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
+const RootDocument = ({ children }: Readonly<{ children: ReactNode }>) => (
+  <html>
+    <head>
+      <HeadContent />
+    </head>
+    <body>
+      <Navbar />
+      {children}
+      <Scripts />
+    </body>
+  </html>
+);
