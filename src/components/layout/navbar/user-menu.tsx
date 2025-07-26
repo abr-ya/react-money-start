@@ -1,6 +1,6 @@
 import { SignedOut, SignInButton, SignUpButton, SignedIn, UserButton } from "@clerk/tanstack-react-start";
 import { ChartColumnBigIcon } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 const UserMenu = () => (
   <div>

@@ -1,2 +1,3 @@
 export { Button } from "./ui/button";
-export { Navbar } from "./navbar/navbar";
+export { NotFound } from "./layout/not-found";
+export { RootLayout } from "./layout/root-layout";
