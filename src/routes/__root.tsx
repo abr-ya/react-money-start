@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 import type { ReactNode } from "react";
 import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { ClerkProvider } from "@clerk/tanstack-react-start";
 
 import appCss from "@/styles/app.css?url";
 // Supports weights 100-900
@@ -8,9 +9,11 @@ import roboto from "@fontsource-variable/roboto?url";
 import { Navbar } from "@/components";
 
 const RootComponent = () => (
-  <RootDocument>
-    <Outlet />
-  </RootDocument>
+  <ClerkProvider>
+    <RootDocument>
+      <Outlet />
+    </RootDocument>
+  </ClerkProvider>
 );
 
 export const Route = createRootRoute({
