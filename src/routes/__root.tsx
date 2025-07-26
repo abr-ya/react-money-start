@@ -7,6 +7,7 @@ import appCss from "@/styles/app.css?url";
 // Supports weights 100-900
 import roboto from "@fontsource-variable/roboto?url";
 import { Navbar } from "@/components";
+import { getSignedInUserId } from "@/data/getSignedInUserId";
 
 const RootComponent = () => (
   <ClerkProvider>
@@ -17,6 +18,11 @@ const RootComponent = () => (
 );
 
 export const Route = createRootRoute({
+  beforeLoad: async () => {
+    const userId = await getSignedInUserId();
+
+    return { userId };
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
