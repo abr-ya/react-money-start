@@ -6,13 +6,14 @@ const RouteComponent = () => (
     <Breadcrumbs
       data={[
         { to: "/dashboard", title: "Dashboard" },
-        { to: null, title: "Transactions" },
+        { to: "/dashboard/transactions", title: "Transactions" },
+        { to: null, title: "New Transaction" },
       ]}
     />
     <Outlet />
   </div>
 );
 
-export const Route = createFileRoute("/_authed/dashboard/transactions/_layout")({
+export const Route = createFileRoute("/_authed/dashboard/transactions/new/_layout")({
   component: RouteComponent,
 });
