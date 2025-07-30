@@ -3,4 +3,4 @@ export { Button } from "./ui/button";
 export { NotFound } from "./layout/not-found";
 export { RootLayout } from "./layout/root-layout";
 
-export { TransactionForm } from "./forms/transaction-form";
+export { TransactionFormProvider } from "./forms/transaction-form-provider";

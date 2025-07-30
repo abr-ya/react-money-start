@@ -1,4 +1,4 @@
-import { TransactionForm } from "@/components";
+import { TransactionFormProvider } from "@/components";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -9,7 +9,7 @@ const RouteComponent = () => {
         <CardTitle>New Transaction</CardTitle>
       </CardHeader>
       <CardContent>
-        <TransactionForm />
+        <TransactionFormProvider />
       </CardContent>
     </Card>
   );
