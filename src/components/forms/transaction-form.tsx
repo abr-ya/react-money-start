@@ -1,7 +1,7 @@
 import { SubmitErrorHandler, SubmitHandler, useFormContext } from "react-hook-form";
 import { TransactionSchemaType } from "./transaction-form-schema";
 import { LABELS, TEST_MODE } from "./transaction-form-contants";
-import { RHFInput, RHFSelect } from "./fields";
+import { RHFDatePicker, RHFInput, RHFSelect } from "./fields";
 import { Button } from "..";
 
 export const TransactionForm = () => {
@@ -21,15 +21,21 @@ export const TransactionForm = () => {
     if (TEST_MODE) console.log("errors", errors);
   };
 
-  const types = ["income", "expense"];
+  const types = [
+    { label: "Income", value: "income" },
+    { label: "Expense", value: "expense" },
+  ];
 
   return (
     <form onSubmit={handleSubmit(submitHandler, errorHandler)}>
       <fieldset disabled={formState.isSubmitting} className="grid grid-cols-2 gap-y-5 gap-x-2">
         <RHFSelect<TransactionSchemaType> label={LABELS.type} name="transactionType" options={types} />
+        {/* todo: Update options! */}
+        <RHFSelect<TransactionSchemaType> label={LABELS.category} name="categoryId" options={types} />
         <RHFInput<TransactionSchemaType> label={LABELS.amount} name="amount" type="number" />
+        <RHFDatePicker<TransactionSchemaType> label={LABELS.date} name="transactionDate" />
       </fieldset>
-      <fieldset disabled={formState.isSubmitting} className="grid grid-cols-2 gap-y-5 gap-x-2">
+      <fieldset disabled={formState.isSubmitting} className="flex flex-col gap-5 mt-5">
         <RHFInput<TransactionSchemaType> label={LABELS.description} name="description" />
         <Button type="submit">{formState.isSubmitting ? "Submitting..." : "Submit"}</Button>
       </fieldset>
