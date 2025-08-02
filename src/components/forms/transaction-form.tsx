@@ -1,11 +1,17 @@
 import { SubmitErrorHandler, SubmitHandler, useFormContext } from "react-hook-form";
+import { categoriesTable } from "@/db/schema";
+
 import { TransactionSchemaType } from "./transaction-form-schema";
 import { LABELS, TEST_MODE } from "./transaction-form-contants";
 import { RHFDatePicker, RHFInput, RHFSelect } from "./fields";
 import { Button } from "..";
 
-export const TransactionForm = () => {
-  const { formState, handleSubmit, reset } = useFormContext<TransactionSchemaType>();
+interface ITransactionForm {
+  categories: (typeof categoriesTable.$inferSelect)[];
+}
+
+export const TransactionForm = ({ categories }: ITransactionForm) => {
+  const { formState, handleSubmit, reset, watch } = useFormContext<TransactionSchemaType>();
 
   const submitHandler: SubmitHandler<TransactionSchemaType> = (data) => {
     const preparedData = data;
@@ -26,12 +32,25 @@ export const TransactionForm = () => {
     { label: "Expense", value: "expense" },
   ];
 
+  const currentType = watch("transactionType");
+  const isExpense = currentType === "expense";
+
+  const expenseCategories = categories
+    .filter((cat) => cat.type === "expense")
+    .map(({ name, id }) => ({ label: name, value: id.toString() }));
+  const incomeCategories = categories
+    .filter((cat) => cat.type === "income")
+    .map(({ name, id }) => ({ label: name, value: id.toString() }));
+
   return (
     <form onSubmit={handleSubmit(submitHandler, errorHandler)}>
       <fieldset disabled={formState.isSubmitting} className="grid grid-cols-2 gap-y-5 gap-x-2">
         <RHFSelect<TransactionSchemaType> label={LABELS.type} name="transactionType" options={types} />
-        {/* todo: Update options! */}
-        <RHFSelect<TransactionSchemaType> label={LABELS.category} name="categoryId" options={types} />
+        {isExpense ? (
+          <RHFSelect<TransactionSchemaType> label={LABELS.category} name="categoryId" options={expenseCategories} />
+        ) : (
+          <RHFSelect<TransactionSchemaType> label={LABELS.category} name="categoryId" options={incomeCategories} />
+        )}
         <RHFInput<TransactionSchemaType> label={LABELS.amount} name="amount" type="number" />
         <RHFDatePicker<TransactionSchemaType> label={LABELS.date} name="transactionDate" />
       </fieldset>
