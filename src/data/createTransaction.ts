@@ -3,14 +3,15 @@ import { neon } from "@/db";
 import { transactionsTable } from "@/db/schema";
 import { createServerFn } from "@tanstack/react-start";
 import { format } from "date-fns";
+import { authMiddleware } from "./authMiddleware";
 
 export const createTransaction = createServerFn({
   method: "POST",
 })
+  .middleware([authMiddleware])
   .validator((data: TransactionSchemaType) => transactionFormSchema.parse(data))
   .handler(async ({ data, context }) => {
-    const userId = context?.userId || "1234";
-    console.log(userId);
+    const userId = context?.userId;
     const transaction = await neon
       .insert(transactionsTable)
       .values({
