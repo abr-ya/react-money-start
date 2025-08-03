@@ -8,19 +8,20 @@ import { Button } from "..";
 
 interface ITransactionForm {
   categories: (typeof categoriesTable.$inferSelect)[];
+  onSubmit: (data: TransactionSchemaType) => void;
 }
 
-export const TransactionForm = ({ categories }: ITransactionForm) => {
+export const TransactionForm = ({ categories, onSubmit }: ITransactionForm) => {
   const { formState, handleSubmit, reset, watch } = useFormContext<TransactionSchemaType>();
 
   const submitHandler: SubmitHandler<TransactionSchemaType> = (data) => {
     const preparedData = data;
     if (TEST_MODE) {
       console.log("preparedData", preparedData);
-      reset();
     } else {
-      console.log("preparedData", preparedData); // todo: send form!
+      onSubmit(preparedData);
     }
+    reset();
   };
 
   const errorHandler: SubmitErrorHandler<TransactionSchemaType> = (errors) => {
