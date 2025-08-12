@@ -1,5 +1,6 @@
 import { HeadContent, Scripts } from "@tanstack/react-router";
 import { ReactNode } from "react";
+import { Toaster } from "@/components/ui/sonner";
 import { Navbar } from "./navbar/navbar";
 
 export const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => (
@@ -10,6 +11,7 @@ export const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => (
     <body>
       <Navbar />
       {children}
+      <Toaster />
       <Scripts />
     </body>
   </html>

@@ -1,19 +1,22 @@
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { toast } from "sonner";
+
 import { TransactionFormProvider } from "@/components";
 import { TransactionSchemaType } from "@/components/forms/transaction-form-schema";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createTransaction } from "@/data/createTransaction";
 import { getCategories } from "@/data/getCategories";
-import { createFileRoute } from "@tanstack/react-router";
 
 const RouteComponent = () => {
   const { categories } = Route.useLoaderData();
+  const navigate = useNavigate();
 
   const createHandler = async (data: TransactionSchemaType) => {
     console.log("HANDLE SUBMIT: ", data);
     const transaction = await createTransaction({ data });
-    console.log({ transaction });
-    // toast
-    // navigate
+    console.log(transaction);
+    toast(`Transaction ${transaction[0].id} has been created by ${transaction[0].userId}.`);
+    navigate({ to: "/dashboard/transactions" });
   };
 
   return (
