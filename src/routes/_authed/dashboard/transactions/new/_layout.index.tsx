@@ -16,7 +16,13 @@ const RouteComponent = () => {
     const transaction = await createTransaction({ data });
     console.log(transaction);
     toast(`Transaction ${transaction[0].id} has been created by ${transaction[0].userId}.`);
-    navigate({ to: "/dashboard/transactions" });
+    navigate({
+      to: "/dashboard/transactions",
+      search: {
+        month: data.transactionDate.getMonth() + 1,
+        year: data.transactionDate.getFullYear(),
+      },
+    });
   };
 
   return (
