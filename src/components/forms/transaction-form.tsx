@@ -1,8 +1,8 @@
 import { SubmitErrorHandler, SubmitHandler, useFormContext } from "react-hook-form";
 import { categoriesTable } from "@/db/schema";
 
-import { TransactionSchemaType } from "./transaction-form-schema";
-import { LABELS, TEST_MODE } from "./transaction-form-contants";
+import { TransactionSchemaType } from "../../schemas/transaction-form-schema";
+import { LABELS, TEST_MODE, TYPES } from "./transaction-form-contants";
 import { RHFDatePicker, RHFInput, RHFSelect } from "./fields";
 import { Button } from "..";
 
@@ -28,11 +28,6 @@ export const TransactionForm = ({ categories, onSubmit }: ITransactionForm) => {
     if (TEST_MODE) console.log("errors", errors);
   };
 
-  const types = [
-    { label: "Income", value: "income" },
-    { label: "Expense", value: "expense" },
-  ];
-
   const currentType = watch("transactionType");
   const isExpense = currentType === "expense";
 
@@ -46,7 +41,7 @@ export const TransactionForm = ({ categories, onSubmit }: ITransactionForm) => {
   return (
     <form onSubmit={handleSubmit(submitHandler, errorHandler)}>
       <fieldset disabled={formState.isSubmitting} className="grid grid-cols-2 gap-y-5 gap-x-2">
-        <RHFSelect<TransactionSchemaType> label={LABELS.type} name="transactionType" options={types} />
+        <RHFSelect<TransactionSchemaType> label={LABELS.type} name="transactionType" options={TYPES} />
         {isExpense ? (
           <RHFSelect<TransactionSchemaType> label={LABELS.category} name="categoryId" options={expenseCategories} />
         ) : (

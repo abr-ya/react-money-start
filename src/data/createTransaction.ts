@@ -1,4 +1,4 @@
-import { transactionFormSchema, TransactionSchemaType } from "@/components/forms/transaction-form-schema";
+import { transactionFormSchema, TransactionSchemaType } from "@/schemas/transaction-form-schema";
 import { neon } from "@/db";
 import { transactionsTable } from "@/db/schema";
 import { createServerFn } from "@tanstack/react-start";

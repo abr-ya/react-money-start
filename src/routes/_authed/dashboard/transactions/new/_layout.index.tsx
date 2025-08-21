@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 
 import { TransactionFormProvider } from "@/components";
-import { TransactionSchemaType } from "@/components/forms/transaction-form-schema";
+import { TransactionSchemaType } from "@/schemas/transaction-form-schema";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createTransaction } from "@/data/createTransaction";
 import { getCategories } from "@/data/getCategories";

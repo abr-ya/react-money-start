@@ -6,7 +6,7 @@ import {
   TransactionSchemaType,
   transactionDefaultValues as defaultValues,
   transactionFormSchema,
-} from "./transaction-form-schema";
+} from "../../schemas/transaction-form-schema";
 import { TransactionForm } from "./transaction-form";
 import { TEST_MODE } from "./transaction-form-contants";
 import { Form } from "../ui/form";

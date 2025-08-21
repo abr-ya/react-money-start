@@ -7,3 +7,8 @@ export const LABELS = {
   description: "Description",
   type: "Transaction Type",
 };
+
+export const TYPES = [
+  { label: "Income", value: "income" },
+  { label: "Expense", value: "expense" },
+];

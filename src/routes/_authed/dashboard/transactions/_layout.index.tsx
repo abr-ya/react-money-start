@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { searchSchema } from "./search-schema";
+import { searchParamsSchema } from "../../../../schemas/search-params-schema";
 
 const RouteComponent = () => {
   return <div>Hello "/_authed/dashboard/transactions/"!</div>;
@@ -7,5 +7,5 @@ const RouteComponent = () => {
 
 export const Route = createFileRoute("/_authed/dashboard/transactions/_layout/")({
   component: RouteComponent,
-  validateSearch: searchSchema,
+  validateSearch: searchParamsSchema,
 });

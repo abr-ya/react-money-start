@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const today = new Date();
 
-export const searchSchema = z.object({
+export const searchParamsSchema = z.object({
   month: z
     .number()
     .min(1)
