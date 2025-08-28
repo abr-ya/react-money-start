@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle, MonthYearSelector } from "@/c
 import { IPeriod } from "@/interfaces/period.interface";
 import { format } from "date-fns";
 
+import { useNavigate } from "@tanstack/react-router";
+
 interface ITransactionsList {
   month: number;
   year: number;
@@ -9,9 +11,14 @@ interface ITransactionsList {
 
 const TransactionsList = ({ month, year }: ITransactionsList) => {
   const formattedSelectedDate = format(new Date(year, month - 1, 1), "MMM yyyy");
+  const navigate = useNavigate();
 
-  const goHandler = (period: IPeriod) => {
-    console.log("GO HANDLER: ", period);
+  const goHandler = ({ year, month }: IPeriod) => {
+    console.log("GO HANDLER: ", { year, month });
+    navigate({
+      to: "/dashboard/transactions",
+      search: { month, year },
+    });
   };
 
   return (

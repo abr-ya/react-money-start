@@ -2,19 +2,19 @@ import { useState } from "react";
 import { format } from "date-fns";
 
 import { IPeriod } from "@/interfaces/period.interface";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Button } from "..";
+import { Button, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "..";
 
 interface IMonthYearSelector extends IPeriod {
+  countPreviousYears?: number;
   goHandler?: (period: IPeriod) => void;
 }
 
-const MonthYearSelector = ({ month, year, goHandler }: IMonthYearSelector) => {
+const MonthYearSelector = ({ month, year, goHandler, countPreviousYears = 5 }: IMonthYearSelector) => {
   const [selectedMonth, setSelectedMonth] = useState(month);
   const [selectedYear, setSelectedYear] = useState(year);
   const selectedDate = new Date(year, month - 1, 1);
 
-  const yearsRange = Array.from({ length: 5 }, (_, i) => new Date().getFullYear() - i);
+  const yearsRange = Array.from({ length: countPreviousYears }, (_, i) => new Date().getFullYear() - i);
   const handleGo = () => {
     if (goHandler) {
       goHandler({ month: selectedMonth, year: selectedYear });
