@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle, MonthYearSelector } from "@/components";
+import { IPeriod } from "@/interfaces/period.interface";
 import { format } from "date-fns";
 
 interface ITransactionsList {
@@ -7,16 +8,18 @@ interface ITransactionsList {
 }
 
 const TransactionsList = ({ month, year }: ITransactionsList) => {
-  const selectedDate = new Date(year, month - 1, 1);
+  const formattedSelectedDate = format(new Date(year, month - 1, 1), "MMM yyyy");
+
+  const goHandler = (period: IPeriod) => {
+    console.log("GO HANDLER: ", period);
+  };
 
   return (
     <Card className="mt-4">
       <CardHeader>
         <CardTitle className="flex justify-between">
-          <span>{format(selectedDate, "MMM yyyy")} Transactions</span>
-          <div className="flex gap-1">
-            <MonthYearSelector month={month} year={year} />
-          </div>
+          <span>{formattedSelectedDate} Transactions</span>
+          <MonthYearSelector month={month} year={year} goHandler={goHandler} />
         </CardTitle>
       </CardHeader>
       <CardContent>CardContent</CardContent>
