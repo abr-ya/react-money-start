@@ -1,9 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 
-import { TransactionFormProvider } from "@/components";
+import { PageBody, TransactionFormProvider } from "@/components";
 import { TransactionSchemaType } from "@/schemas/transaction-form-schema";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createTransaction } from "@/data/createTransaction";
 import { getCategories } from "@/data/getCategories";
 
@@ -26,14 +25,9 @@ const RouteComponent = () => {
   };
 
   return (
-    <Card className="max-w-screen-md mt-4">
-      <CardHeader>
-        <CardTitle>New Transaction</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <TransactionFormProvider categories={categories} onSubmit={createHandler} />
-      </CardContent>
-    </Card>
+    <PageBody title="New Transaction">
+      <TransactionFormProvider categories={categories} onSubmit={createHandler} />
+    </PageBody>
   );
 };
 
