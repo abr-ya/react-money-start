@@ -6,8 +6,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 const TransactionDetail = () => {
   const { categories, transaction } = Route.useLoaderData();
-
-  console.log("transaction detail: ", transaction);
+  const transactionType = categories.find((category) => category.id === transaction.categoryId)?.type ?? "income";
 
   const updateHandler = async (data: TransactionSchemaType) => {
     console.log("HANDLE SUBMIT (EDIT): ", data);
@@ -15,7 +14,17 @@ const TransactionDetail = () => {
 
   return (
     <PageBody title="Edit Transaction">
-      <TransactionFormProvider categories={categories} onSubmit={updateHandler} />
+      <TransactionFormProvider
+        categories={categories}
+        onSubmit={updateHandler}
+        init={{
+          amount: Number(transaction.amount),
+          categoryId: transaction.categoryId,
+          description: transaction.description,
+          transactionDate: new Date(transaction.transactionDate),
+          transactionType,
+        }}
+      />
     </PageBody>
   );
 };

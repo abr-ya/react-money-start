@@ -13,7 +13,7 @@ import { Form } from "../ui/form";
 
 export const TransactionFormProvider = (props) => {
   const formMethods = useForm<TransactionSchemaType>({
-    defaultValues,
+    defaultValues: props.init || defaultValues,
     mode: "all",
     // @ts-expect-error todo: fix it!!!
     resolver: zodResolver(transactionFormSchema),
