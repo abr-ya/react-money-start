@@ -1,5 +1,6 @@
-import { Breadcrumbs } from "@/components";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
+
+import { Breadcrumbs } from "@/components";
 
 const RouteComponent = () => (
   <div className="max-w-[960px] mx-auto py-10">
