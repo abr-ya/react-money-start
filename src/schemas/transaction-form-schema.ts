@@ -17,6 +17,7 @@ export type TransactionSchemaType = z.infer<typeof transactionFormSchema>;
 
 export type TransactionDataType = Omit<TransactionSchemaType, "categoryId"> & {
   id: number;
+  category: string;
   createdAt: Date;
   updatedAt: Date;
 };

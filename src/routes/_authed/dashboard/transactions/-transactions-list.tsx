@@ -35,14 +35,18 @@ const TransactionsList = ({ month, year, yearsRange, transactions }: ITransactio
   return (
     <Card className="mt-4">
       <CardHeader>
-        <CardTitle className="flex justify-between">
-          <span>{formattedSelectedDate} Transactions</span>
+        <CardTitle className="flex justify-between items-baseline">
+          <div>{formattedSelectedDate} Transactions</div>
           <MonthYearSelector month={month} year={year} goHandler={goHandler} yearsRange={yearsRange} />
         </CardTitle>
       </CardHeader>
       <CardContent>
         <ButtonLink to="/dashboard/transactions/new" text="New Transaction" />
-        <TransactionsTable data={transactions} />
+        {transactions.length === 0 ? (
+          <p className="mt-5">No transactions found.</p>
+        ) : (
+          <TransactionsTable data={transactions} />
+        )}
       </CardContent>
     </Card>
   );

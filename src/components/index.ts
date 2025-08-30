@@ -1,3 +1,4 @@
+export { Badge, badgeVariants } from "./ui/badge";
 export { Breadcrumbs } from "./layout/breadcrumbs";
 export { Button } from "./ui/button";
 export { ButtonLink } from "./common/button-link";
@@ -7,6 +8,7 @@ export { default as MonthYearSelector } from "./common/month-year-selector";
 export { NotFound } from "./layout/not-found";
 export { RootLayout } from "./layout/root-layout";
 export * from "./ui/select";
+export * from "./ui/table";
 
 export { TransactionFormProvider } from "./forms/transaction-form-provider";
 
