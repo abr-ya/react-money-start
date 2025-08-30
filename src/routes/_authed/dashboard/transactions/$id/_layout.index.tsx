@@ -1,15 +1,28 @@
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { toast } from "sonner";
+
 import { PageBody, TransactionFormProvider } from "@/components";
 import { getCategories } from "@/data/getCategories";
 import { getTransactionById } from "@/data/getTransactionById";
+import { updateTransaction } from "@/data/updateTransaction";
 import { TransactionSchemaType } from "@/schemas/transaction-form-schema";
-import { createFileRoute } from "@tanstack/react-router";
 
 const TransactionDetail = () => {
+  const navigate = useNavigate();
   const { categories, transaction } = Route.useLoaderData();
   const transactionType = categories.find((category) => category.id === transaction.categoryId)?.type ?? "income";
 
   const updateHandler = async (data: TransactionSchemaType) => {
     console.log("HANDLE SUBMIT (EDIT): ", data);
+    const updated = await updateTransaction({ data: { id: transaction.id, ...data } });
+    toast(`Transaction ${updated[0].id} has been updated by ${updated[0].userId}.`);
+    navigate({
+      to: "/dashboard/transactions",
+      search: {
+        month: data.transactionDate.getMonth() + 1,
+        year: data.transactionDate.getFullYear(),
+      },
+    });
   };
 
   return (

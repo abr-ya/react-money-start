@@ -13,7 +13,12 @@ export const transactionFormSchema = z.object({
     .max(300, "Description must contain a maximum of 300 characters"),
 });
 
+export const updateTransactionSchema = transactionFormSchema.extend({
+  id: z.number(),
+});
+
 export type TransactionSchemaType = z.infer<typeof transactionFormSchema>;
+export type UpdateTransactionSchemaType = z.infer<typeof updateTransactionSchema>;
 
 export type TransactionDataType = Omit<TransactionSchemaType, "categoryId"> & {
   id: number;
