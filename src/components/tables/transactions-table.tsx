@@ -1,3 +1,4 @@
+import { Link, useRouter } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { PencilIcon } from "lucide-react";
 
@@ -10,6 +11,7 @@ interface ITransactionsTableProps {
 
 export const TransactionsTable = ({ data }: ITransactionsTableProps) => {
   console.log("TransactionsTable data: ", data);
+  const router = useRouter();
 
   return (
     <Table className="mt-4">
@@ -28,7 +30,6 @@ export const TransactionsTable = ({ data }: ITransactionsTableProps) => {
           <TableRow key={transaction.id}>
             <TableCell>{format(transaction.transactionDate, "do MMM yyyy")}</TableCell>
             <TableCell>{transaction.description}</TableCell>
-            {/* todo: Badge */}
             <TableCell className="capitalize">
               <Badge className={transaction.transactionType === "income" ? "bg-lime-500" : "bg-orange-500"}>
                 {transaction.transactionType}
@@ -38,8 +39,17 @@ export const TransactionsTable = ({ data }: ITransactionsTableProps) => {
             <TableCell className="text-right">{transaction.amount} usd</TableCell>
             <TableCell className="text-right">
               <Button variant="outline" size="icon" aria-label="Edit transaction" asChild>
-                {/* todo: Add Edit Link! */}
-                <PencilIcon className="w-[20px] h-[20px]" />
+                <Link
+                  onClick={() => {
+                    router.clearCache({
+                      filter: (route) => route.pathname !== `/dashboard/transactions/${transaction.id}`,
+                    });
+                  }}
+                  // @ts-expect-error this work, but... todo: check ts!
+                  to={`/dashboard/transactions/${transaction.id.toString()}`}
+                >
+                  <PencilIcon className="w-[20px] h-[20px]" />
+                </Link>
               </Button>
             </TableCell>
           </TableRow>
