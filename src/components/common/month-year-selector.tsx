@@ -5,16 +5,15 @@ import { IPeriod } from "@/interfaces/period.interface";
 import { Button, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "..";
 
 interface IMonthYearSelector extends IPeriod {
-  countPreviousYears?: number;
   goHandler?: (period: IPeriod) => void;
+  yearsRange: number[];
 }
 
-const MonthYearSelector = ({ month, year, goHandler, countPreviousYears = 5 }: IMonthYearSelector) => {
+const MonthYearSelector = ({ month, year, goHandler, yearsRange }: IMonthYearSelector) => {
   const [selectedMonth, setSelectedMonth] = useState(month);
   const [selectedYear, setSelectedYear] = useState(year);
   const selectedDate = new Date(year, month - 1, 1);
 
-  const yearsRange = Array.from({ length: countPreviousYears }, (_, i) => new Date().getFullYear() - i);
   const handleGo = () => {
     if (goHandler) {
       goHandler({ month: selectedMonth, year: selectedYear });

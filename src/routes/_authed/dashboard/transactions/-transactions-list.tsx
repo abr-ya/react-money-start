@@ -7,9 +7,10 @@ import { useNavigate } from "@tanstack/react-router";
 interface ITransactionsList {
   month: number;
   year: number;
+  yearsRange: number[];
 }
 
-const TransactionsList = ({ month, year }: ITransactionsList) => {
+const TransactionsList = ({ month, year, yearsRange }: ITransactionsList) => {
   const formattedSelectedDate = format(new Date(year, month - 1, 1), "MMM yyyy");
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ const TransactionsList = ({ month, year }: ITransactionsList) => {
       <CardHeader>
         <CardTitle className="flex justify-between">
           <span>{formattedSelectedDate} Transactions</span>
-          <MonthYearSelector month={month} year={year} goHandler={goHandler} />
+          <MonthYearSelector month={month} year={year} goHandler={goHandler} yearsRange={yearsRange} />
         </CardTitle>
       </CardHeader>
       <CardContent>CardContent</CardContent>

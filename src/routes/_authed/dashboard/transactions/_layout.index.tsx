@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { searchParamsSchema } from "../../../../schemas/search-params-schema";
 import TransactionsList from "./-transactions-list";
+import { getTransactionYearsRange } from "@/data/getTransactionYearsRange";
 
 const RouteComponent = () => {
   const data = Route.useLoaderData();
 
-  return <TransactionsList month={data.month} year={data.year} />;
+  return <TransactionsList month={data.month} year={data.year} yearsRange={data.yearsRange} />;
 };
 
 export const Route = createFileRoute("/_authed/dashboard/transactions/_layout/")({
@@ -18,9 +19,12 @@ export const Route = createFileRoute("/_authed/dashboard/transactions/_layout/")
     };
   },
   loader: async ({ deps }) => {
+    const yearsRange = await getTransactionYearsRange();
+
     return {
       month: deps.month,
       year: deps.year,
+      yearsRange,
     };
   },
   validateSearch: searchParamsSchema,
