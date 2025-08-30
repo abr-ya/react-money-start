@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import { PencilIcon } from "lucide-react";
 
 import { TransactionDataType } from "@/schemas/transaction-form-schema";
-import { Button, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "..";
+import { Button, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Badge } from "..";
 
 interface ITransactionsTableProps {
   data: TransactionDataType[];
@@ -19,7 +19,7 @@ export const TransactionsTable = ({ data }: ITransactionsTableProps) => {
           <TableHead>Description</TableHead>
           <TableHead>Type</TableHead>
           <TableHead>Category</TableHead>
-          <TableHead>Amount</TableHead>
+          <TableHead className="text-right">Amount</TableHead>
           <TableHead />
         </TableRow>
       </TableHeader>
@@ -29,9 +29,13 @@ export const TransactionsTable = ({ data }: ITransactionsTableProps) => {
             <TableCell>{format(transaction.transactionDate, "do MMM yyyy")}</TableCell>
             <TableCell>{transaction.description}</TableCell>
             {/* todo: Badge */}
-            <TableCell className="capitalize">{transaction.transactionType}</TableCell>
+            <TableCell className="capitalize">
+              <Badge className={transaction.transactionType === "income" ? "bg-lime-500" : "bg-orange-500"}>
+                {transaction.transactionType}
+              </Badge>
+            </TableCell>
             <TableCell>{transaction.category}</TableCell>
-            <TableCell>{transaction.amount} usd</TableCell>
+            <TableCell className="text-right">{transaction.amount} usd</TableCell>
             <TableCell className="text-right">
               <Button variant="outline" size="icon" aria-label="Edit transaction" asChild>
                 {/* todo: Add Edit Link! */}

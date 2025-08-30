@@ -43,7 +43,7 @@ const TransactionsList = ({ month, year, yearsRange, transactions }: ITransactio
       <CardContent>
         <ButtonLink to="/dashboard/transactions/new" text="New Transaction" />
         {transactions.length === 0 ? (
-          <p className="mt-5">No transactions found.</p>
+          <p className="text-center py-10 text-lg text-muted-foreground">No transactions found for this month.</p>
         ) : (
           <TransactionsTable data={transactions} />
         )}
