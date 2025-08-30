@@ -16,3 +16,11 @@ export const searchParamsSchema = z.object({
     .catch(today.getFullYear())
     .optional(),
 });
+
+export const getTransactionsSchema = z.object({
+  month: z.number().min(1).max(12),
+  year: z
+    .number()
+    .min(today.getFullYear() - 100)
+    .max(today.getFullYear()),
+});

@@ -9,3 +9,5 @@ export { RootLayout } from "./layout/root-layout";
 export * from "./ui/select";
 
 export { TransactionFormProvider } from "./forms/transaction-form-provider";
+
+export { TransactionsTable } from "./tables/transactions-table";

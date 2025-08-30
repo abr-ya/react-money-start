@@ -1,4 +1,5 @@
-import { date, integer, numeric, pgTable, text } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
+import { date, integer, numeric, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 export const categoriesTable = pgTable("categories", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -16,5 +17,9 @@ export const transactionsTable = pgTable("transactions", {
   transactionDate: date("transaction_date").notNull(),
   categoryId: integer("category_id")
     .references(() => categoriesTable.id)
+    .notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at")
+    .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
 });
