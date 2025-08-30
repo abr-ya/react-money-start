@@ -29,13 +29,23 @@ const TransactionDetail = () => {
   );
 };
 
+const ErrorDetail = ({ errorMessage }: { errorMessage: string }) => (
+  <>
+    <div className="text-3xl text-muted-foreground">Oops! Transaction not found.</div>
+    <p>Detail: {errorMessage}</p>
+  </>
+);
+
 export const Route = createFileRoute("/_authed/dashboard/transactions/$id/_layout/")({
   component: TransactionDetail,
+  errorComponent: ({ error }) => <ErrorDetail errorMessage={error.message} />,
   loader: async ({ params }) => {
     const [categories, transaction] = await Promise.all([
       getCategories(),
       getTransactionById({ data: { id: Number(params.id) } }),
     ]);
+
+    if (!transaction) throw new Error("Transaction not found");
 
     return {
       categories,
