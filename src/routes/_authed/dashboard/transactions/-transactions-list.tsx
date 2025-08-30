@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle, MonthYearSelector } from "@/components";
+import { ButtonLink, Card, CardContent, CardHeader, CardTitle, MonthYearSelector } from "@/components";
 import { IPeriod } from "@/interfaces/period.interface";
 import { format } from "date-fns";
 
@@ -30,7 +30,9 @@ const TransactionsList = ({ month, year, yearsRange }: ITransactionsList) => {
           <MonthYearSelector month={month} year={year} goHandler={goHandler} yearsRange={yearsRange} />
         </CardTitle>
       </CardHeader>
-      <CardContent>CardContent</CardContent>
+      <CardContent>
+        <ButtonLink to="/dashboard/transactions/new" text="New Transaction" />
+      </CardContent>
     </Card>
   );
 };
