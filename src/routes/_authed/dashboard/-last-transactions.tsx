@@ -1,16 +1,17 @@
-import { PageBody } from "@/components";
+import { PageBody, TransactionsTable } from "@/components";
 import { TransactionDataType } from "@/schemas/transaction-form-schema";
 
 interface ILastTransactions {
   transactions: TransactionDataType[];
 }
 
-export const LastTransactions = ({ transactions }: ILastTransactions) => {
-  console.log("Dashboard, lastTransactions: ", transactions);
-
-  return (
-    <PageBody title="Last Transactions">
-      <div>LastTransactions</div>
-    </PageBody>
-  );
-};
+// todo: the same PageBody style as -transactions-list
+export const LastTransactions = ({ transactions }: ILastTransactions) => (
+  <PageBody title="Last Transactions">
+    {transactions.length === 0 ? (
+      <p className="text-center py-10 text-lg text-muted-foreground">No transactions found for this month.</p>
+    ) : (
+      <TransactionsTable data={transactions} />
+    )}
+  </PageBody>
+);

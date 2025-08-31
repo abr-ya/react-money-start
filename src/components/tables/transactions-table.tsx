@@ -10,7 +10,6 @@ interface ITransactionsTableProps {
 }
 
 export const TransactionsTable = ({ data }: ITransactionsTableProps) => {
-  console.log("TransactionsTable data: ", data);
   const router = useRouter();
 
   return (

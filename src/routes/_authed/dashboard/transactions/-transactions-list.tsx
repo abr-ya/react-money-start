@@ -32,6 +32,7 @@ const TransactionsList = ({ month, year, yearsRange, transactions }: ITransactio
     });
   };
 
+  // todo: move card to reusable component
   return (
     <Card className="mt-4">
       <CardHeader>
