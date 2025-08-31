@@ -32,7 +32,7 @@ const TransactionDetail = () => {
         onSubmit={updateHandler}
         init={{
           amount: Number(transaction.amount),
-          categoryId: transaction.categoryId,
+          categoryId: transaction.categoryId.toString(), // Fix for RHFSelect which expects a string value
           description: transaction.description,
           transactionDate: new Date(transaction.transactionDate),
           transactionType,
