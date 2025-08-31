@@ -3,6 +3,7 @@ import { format } from "date-fns";
 
 import { IPeriod } from "@/interfaces/period.interface";
 import { Button, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "..";
+import { SimpleSelect } from "./simple-select";
 
 interface IMonthYearSelector extends IPeriod {
   goHandler?: (period: IPeriod) => void;
@@ -10,13 +11,13 @@ interface IMonthYearSelector extends IPeriod {
 }
 
 const MonthYearSelector = ({ month, year, goHandler, yearsRange }: IMonthYearSelector) => {
-  const [selectedMonth, setSelectedMonth] = useState(month);
-  const [selectedYear, setSelectedYear] = useState(year);
+  const [selectedMonth, setSelectedMonth] = useState(month.toString());
+  const [selectedYear, setSelectedYear] = useState(year.toString());
   const selectedDate = new Date(year, month - 1, 1);
 
   const handleGo = () => {
     if (goHandler) {
-      goHandler({ month: selectedMonth, year: selectedYear });
+      goHandler({ month: Number(selectedMonth), year: Number(selectedYear) });
     } else {
       console.log("No goHandler provided");
     }
@@ -24,7 +25,7 @@ const MonthYearSelector = ({ month, year, goHandler, yearsRange }: IMonthYearSel
 
   return (
     <div className="flex gap-1">
-      <Select value={selectedMonth.toString()} onValueChange={(value) => setSelectedMonth(Number(value))}>
+      <Select value={selectedMonth.toString()} onValueChange={(value) => setSelectedMonth(value)}>
         <SelectTrigger>
           <SelectValue />
         </SelectTrigger>
@@ -36,18 +37,11 @@ const MonthYearSelector = ({ month, year, goHandler, yearsRange }: IMonthYearSel
           ))}
         </SelectContent>
       </Select>
-      <Select value={selectedYear.toString()} onValueChange={(value) => setSelectedYear(Number(value))}>
-        <SelectTrigger>
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          {yearsRange.map((year) => (
-            <SelectItem value={year.toString()} key={year}>
-              {year}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <SimpleSelect
+        options={yearsRange.map((year) => ({ value: year.toString(), label: year.toString() }))}
+        onSelect={setSelectedYear}
+        value={selectedYear.toString()}
+      />
       <Button onClick={handleGo}>Go</Button>
     </div>
   );
