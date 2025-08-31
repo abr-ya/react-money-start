@@ -3,24 +3,17 @@ import { searchParamsSchema } from "../../../../schemas/search-params-schema";
 import TransactionsList from "./-transactions-list";
 import { getTransactionYearsRange } from "@/data/getTransactionYearsRange";
 import { getTransactionsByMonth } from "@/data/getTransactionsByMonth";
-import { TransactionDataType } from "@/schemas/transaction-form-schema";
+import { normaliseTransactions } from "@/schemas/normalize";
 
 const RouteComponent = () => {
   const data = Route.useLoaderData();
-  const preparedTransactions = data.transactions
-    .filter((tx) => tx.transactionType !== null)
-    .map((tx) => ({
-      ...tx,
-      amount: Number(tx.amount),
-      transactionDate: new Date(tx.transactionDate),
-    }));
 
   return (
     <TransactionsList
       month={data.month}
       year={data.year}
       yearsRange={data.yearsRange}
-      transactions={preparedTransactions as unknown as TransactionDataType[]}
+      transactions={normaliseTransactions(data.transactions)}
     />
   );
 };
