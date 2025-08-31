@@ -3,13 +3,14 @@ import { Cashflow } from "./-cashflow";
 import { LastTransactions } from "./-last-transactions";
 import { getLastTransactions } from "@/data/getLastTransactions";
 import { normaliseTransactions } from "@/schemas/normalize";
+import { getAnnualCashflow } from "@/data/getAnnualCashflow";
 
 const RouteComponent = () => {
-  const { transactions } = Route.useLoaderData();
+  const { cashflow, transactions } = Route.useLoaderData();
 
   return (
     <>
-      <Cashflow />
+      <Cashflow data={cashflow} />
       <LastTransactions transactions={normaliseTransactions(transactions)} />
     </>
   );
@@ -18,8 +19,11 @@ const RouteComponent = () => {
 export const Route = createFileRoute("/_authed/dashboard/_layout/")({
   component: RouteComponent,
   loader: async () => {
-    const [transactions] = await Promise.all([getLastTransactions()]);
+    const [transactions, cashflow] = await Promise.all([
+      getLastTransactions(),
+      getAnnualCashflow({ data: { year: new Date().getFullYear() } }),
+    ]);
 
-    return { transactions };
+    return { transactions, cashflow };
   },
 });
