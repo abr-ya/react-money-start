@@ -9,7 +9,6 @@ const RouteComponent = () => {
 
   return (
     <>
-      <h1 className="text-2xl font-semibold pb-4">Dashboard</h1>
       <Cashflow />
       <LastTransactions transactions={normaliseTransactions(transactions)} />
     </>

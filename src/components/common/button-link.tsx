@@ -1,15 +1,13 @@
-import { Button } from "../ui/button";
+import { Button, IButtonProps } from "../ui/button";
 import { Link } from "@tanstack/react-router";
 
-interface IButtonLink {
+interface IButtonLink extends IButtonProps {
   to: string;
   text: string;
 }
 
-export const ButtonLink = ({ to, text }: IButtonLink) => {
-  return (
-    <Button asChild>
-      <Link to={to}>{text}</Link>
-    </Button>
-  );
-};
+export const ButtonLink = ({ to, text, ...props }: IButtonLink) => (
+  <Button asChild {...props}>
+    <Link to={to}>{text}</Link>
+  </Button>
+);
