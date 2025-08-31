@@ -4,13 +4,15 @@ import { LastTransactions } from "./-last-transactions";
 import { getLastTransactions } from "@/data/getLastTransactions";
 import { normaliseTransactions } from "@/schemas/normalize";
 import { getAnnualCashflow } from "@/data/getAnnualCashflow";
+import { getTransactionYearsRange } from "@/data/getTransactionYearsRange";
+import { searchYearSchema } from "@/schemas/search-params-schema";
 
 const RouteComponent = () => {
-  const { cashflow, transactions } = Route.useLoaderData();
+  const { cashflow, transactions, yearsRange, cfyear } = Route.useLoaderData();
 
   return (
     <>
-      <Cashflow data={cashflow} />
+      <Cashflow data={cashflow} yearsRange={yearsRange} year={cfyear.toString()} />
       <LastTransactions transactions={normaliseTransactions(transactions)} />
     </>
   );
@@ -18,12 +20,16 @@ const RouteComponent = () => {
 
 export const Route = createFileRoute("/_authed/dashboard/_layout/")({
   component: RouteComponent,
-  loader: async () => {
-    const [transactions, cashflow] = await Promise.all([
+  loaderDeps: ({ search }) => ({ year: search.year }),
+  loader: async ({ deps }) => {
+    const currentYear = deps.year ?? new Date().getFullYear();
+    const [transactions, cashflow, yearsRange] = await Promise.all([
       getLastTransactions(),
-      getAnnualCashflow({ data: { year: new Date().getFullYear() } }),
+      getAnnualCashflow({ data: { year: currentYear } }),
+      getTransactionYearsRange(),
     ]);
 
-    return { transactions, cashflow };
+    return { transactions, cashflow, yearsRange, cfyear: currentYear };
   },
+  validateSearch: searchYearSchema,
 });

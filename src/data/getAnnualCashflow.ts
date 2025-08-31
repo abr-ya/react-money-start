@@ -5,6 +5,7 @@ import { z } from "zod";
 import { neon } from "@/db";
 import { categoriesTable, transactionsTable } from "@/db/schema";
 import { authMiddleware } from "./authMiddleware";
+import { IMonthlyCashflow } from "@/interfaces/period.interface";
 
 const schema = z.object({
   year: z.number(),
@@ -33,11 +34,7 @@ export const getAnnualCashflow = createServerFn({
       .groupBy(sql`EXTRACT(MONTH FROM ${transactionsTable.transactionDate})`)
       .orderBy(sql`EXTRACT(MONTH FROM ${transactionsTable.transactionDate})`);
 
-    const annualCashflow: {
-      month: number;
-      income: number;
-      expenses: number;
-    }[] = [];
+    const annualCashflow: IMonthlyCashflow[] = [];
 
     for (let i = 1; i <= 12; i++) {
       const monthlyCashflow = cashflow.find((cf) => Number(cf.month) === i);
