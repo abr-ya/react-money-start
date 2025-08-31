@@ -9,7 +9,7 @@ interface ILastTransactions {
 export const LastTransactions = ({ transactions }: ILastTransactions) => (
   <PageBody title="Last Transactions">
     {transactions.length === 0 ? (
-      <p className="text-center py-10 text-lg text-muted-foreground">No transactions found for this month.</p>
+      <p className="text-center py-10 text-lg text-muted-foreground">No transactions found.</p>
     ) : (
       <TransactionsTable data={transactions} />
     )}

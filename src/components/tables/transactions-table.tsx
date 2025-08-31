@@ -13,7 +13,7 @@ export const TransactionsTable = ({ data }: ITransactionsTableProps) => {
   const router = useRouter();
 
   return (
-    <Table className="mt-4">
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead>Date</TableHead>

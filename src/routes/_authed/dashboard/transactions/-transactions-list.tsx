@@ -1,17 +1,9 @@
-import { format } from "date-fns";
 import { useNavigate } from "@tanstack/react-router";
+import { format } from "date-fns";
 
-import {
-  ButtonLink,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  MonthYearSelector,
-  TransactionsTable,
-} from "@/components";
-import { IPeriod } from "@/interfaces/period.interface";
+import { ButtonLink, MonthYearSelector, PageWithTable, TransactionsTable } from "@/components";
 import { TransactionDataType } from "@/schemas/transaction-form-schema";
+import { IPeriod } from "@/interfaces/period.interface";
 
 interface ITransactionsList {
   transactions: TransactionDataType[];
@@ -32,24 +24,22 @@ const TransactionsList = ({ month, year, yearsRange, transactions }: ITransactio
     });
   };
 
-  // todo: move card to reusable component
   return (
-    <Card className="mt-4">
-      <CardHeader>
-        <CardTitle className="flex justify-between items-baseline">
-          <div>{formattedSelectedDate} Transactions</div>
+    <PageWithTable
+      title={`${formattedSelectedDate} Transactions`}
+      headerRight={
+        <div className="flex gap-4">
           <MonthYearSelector month={month} year={year} goHandler={goHandler} yearsRange={yearsRange} />
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <ButtonLink to="/dashboard/transactions/new" text="New Transaction" />
-        {transactions.length === 0 ? (
-          <p className="text-center py-10 text-lg text-muted-foreground">No transactions found for this month.</p>
-        ) : (
-          <TransactionsTable data={transactions} />
-        )}
-      </CardContent>
-    </Card>
+          <ButtonLink to="/dashboard/transactions/new" text="New Transaction" />
+        </div>
+      }
+    >
+      {transactions.length === 0 ? (
+        <p className="text-center py-5 text-lg text-muted-foreground">No transactions found for this month.</p>
+      ) : (
+        <TransactionsTable data={transactions} />
+      )}
+    </PageWithTable>
   );
 };
 
