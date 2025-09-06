@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import cover from "@/assets/cover.webp";
 import { ChartColumnBigIcon } from "lucide-react";
+
+import cover from "@/assets/cover.webp";
+import { LinksOrLogin } from "@/components";
 
 const Home = () => (
   <div className="min-h-[400px] h-[calc(100vh-80px)] flex items-center justify-center relative">
@@ -10,6 +12,7 @@ const Home = () => (
         <ChartColumnBigIcon size={60} className="text-lime-500" /> MoneyTracker
       </h1>
       <p className="text-2xl">Track your finances with ease</p>
+      <LinksOrLogin />
     </div>
   </div>
 );
