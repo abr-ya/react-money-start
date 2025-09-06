@@ -1,11 +1,21 @@
 import { defineConfig } from "vite";
-import tsConfigPaths from "vite-tsconfig-paths";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
-
-export default defineConfig({
+import viteTsConfigPaths from "vite-tsconfig-paths";
+const config = defineConfig({
+  plugins: [
+    // this is the plugin that enables path aliases
+    viteTsConfigPaths({
+      projects: ["./tsconfig.json"],
+    }),
+    tanstackStart({
+      customViteReactPlugin: true,
+    }),
+    viteReact(),
+  ],
   server: {
-    port: 3000,
+    port: 3003,
   },
-  plugins: [tsConfigPaths(), tanstackStart({ customViteReactPlugin: true }), viteReact()],
 });
+
+export default config;

@@ -11,6 +11,7 @@ import { TransactionForm } from "./transaction-form";
 import { TEST_MODE } from "./transaction-form-contants";
 import { Form } from "../ui/form";
 
+// @ts-expect-error todo: props!
 export const TransactionFormProvider = (props) => {
   const formMethods = useForm<TransactionSchemaType>({
     defaultValues: props.init || defaultValues,
