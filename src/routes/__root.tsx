@@ -17,6 +17,7 @@ const RootComponent = () => (
 );
 
 export const Route = createRootRoute({
+  pendingMs: 50, // delay before showing pending state
   beforeLoad: async () => {
     const userId = await getSignedInUserId();
 

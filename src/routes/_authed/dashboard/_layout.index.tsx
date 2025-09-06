@@ -6,6 +6,7 @@ import { normaliseTransactions } from "@/schemas/normalize";
 import { getAnnualCashflow } from "@/data/getAnnualCashflow";
 import { getTransactionYearsRange } from "@/data/getTransactionYearsRange";
 import { searchYearSchema } from "@/schemas/search-params-schema";
+import { LoadingSkeleton } from "@/components";
 
 const RouteComponent = () => {
   const { cashflow, transactions, yearsRange, cfyear } = Route.useLoaderData();
@@ -20,6 +21,7 @@ const RouteComponent = () => {
 
 export const Route = createFileRoute("/_authed/dashboard/_layout/")({
   component: RouteComponent,
+  pendingComponent: () => <LoadingSkeleton />, // ==> Outlet!
   loaderDeps: ({ search }) => ({ year: search.year }),
   loader: async ({ deps }) => {
     const currentYear = deps.year ?? new Date().getFullYear();
