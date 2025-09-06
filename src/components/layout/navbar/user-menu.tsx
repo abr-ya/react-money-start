@@ -25,12 +25,8 @@ const UserMenu = () => {
           showName
           appearance={{
             elements: {
-              userButtonAvatarBox: {
-                border: "1px solid white",
-              },
-              userButtonOuterIdentifier: {
-                color: "white",
-              },
+              userButtonAvatarBox: { border: "1px solid white" },
+              userButtonOuterIdentifier: { color: "white" },
             },
           }}
         >

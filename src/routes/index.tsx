@@ -1,21 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-
-import { ButtonLink, PageWithTable } from "@/components";
+import cover from "@/assets/cover.webp";
+import { ChartColumnBigIcon } from "lucide-react";
 
 const Home = () => (
-  <div className="max-w-[960px] mx-auto py-10">
-    <PageWithTable
-      title="Home Page"
-      headerRight={
-        <div className="flex gap-4">
-          <ButtonLink to="/dashboard/transactions" text="View All Transactions" variant="outline" />
-          <ButtonLink to="/dashboard/transactions/new" text="New Transaction" />
-        </div>
-      }
-    >
-      <h1>Hello, TanStack Start!</h1>
-      <p>About project...</p>
-    </PageWithTable>
+  <div className="min-h-[400px] h-[calc(100vh-80px)] flex items-center justify-center relative">
+    <img src={cover} alt="" className="absolute top-0 left-0 object-cover object-center size-full opacity-50" />
+    <div className="flex flex-col gap-4 text-center relative z-10">
+      <h1 className="text-5xl font-bold flex gap-1 items-center">
+        <ChartColumnBigIcon size={60} className="text-lime-500" /> MoneyTracker
+      </h1>
+      <p className="text-2xl">Track your finances with ease</p>
+    </div>
   </div>
 );
 
